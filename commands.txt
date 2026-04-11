@@ -1,0 +1,23 @@
+python --version
+pip install django
+django-admin --version
+django-admin startproject config .
+python manage.py runserver
+
+# зупинка сервера
+Ctrl + C
+
+# зберегти залежності
+pip freeze > requirements.txt
+
+# створення міграцій
+python manage.py makemigrations
+
+# створення міграцій для додатку core
+python manage.py makemigrations core
+
+# застосувати міграції до бази
+python manage.py migrate
+
+# встановлення PostgreSQL драйвера
+pip install psycopg2-binary
