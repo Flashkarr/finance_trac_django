@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Wallet, Category, Transaction, Budget, PaymentMethod
+from apps.core.models import UserProfile, Wallet, Category, Transaction, Budget, PaymentMethod
 
 admin.site.register(UserProfile)
 admin.site.register(Wallet)
