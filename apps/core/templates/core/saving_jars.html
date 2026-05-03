@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Банки накопичення{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Банки накопичення</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="title" placeholder="Назва банки, наприклад На iPhone" required>
+
+        <select name="wallet" required>
+            {% for wallet in wallets %}
+                <option value="{{ wallet.id }}">{{ wallet.name }} — {{ wallet.balance }} {{ wallet.currency }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" step="0.01" name="goal_amount" placeholder="Цільова сума" required>
+        <input type="number" step="0.01" name="current_amount" placeholder="Скільки відкласти зараз" required>
+
+        <button type="submit">Створити банку</button>
+    </form>
+
+    <hr>
+
+    <div class="items-list">
+        {% for jar in saving_jars %}
+            <div class="item-row">
+                <span>
+                    {{ jar.title }} —
+                    {{ jar.current_amount }} / {{ jar.goal_amount }} UAH |
+                    карта: {{ jar.wallet.name }}
+                </span>
+
+                <a class="small-btn danger" href="{% url 'saving_jar_delete' jar.id %}">
+                    Видалити
+                </a>
+            </div>
+        {% empty %}
+            <p>Банок ще немає</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

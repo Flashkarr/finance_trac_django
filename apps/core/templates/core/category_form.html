@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Редагування категорії{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Редагувати категорію</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ category.name }}" required>
+
+        <select name="category_type">
+            {% for value, label in category_types %}
+                <option value="{{ value }}" {% if category.category_type == value %}selected{% endif %}>
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <input type="text" name="description" value="{{ category.description }}">
+        <button type="submit">Зберегти</button>
+    </form>
+</div>
+{% endblock %}

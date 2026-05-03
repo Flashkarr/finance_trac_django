@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Методи оплати{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Методи оплати</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Назва" required>
+        <input type="text" name="details" placeholder="Деталі">
+        <button type="submit">Додати</button>
+    </form>
+
+    <hr>
+
+    <div class="items-list">
+        {% for p in payment_methods %}
+            <div class="item-row">
+                <span>{{ p.name }} — {{ p.details }}</span>
+                <div>
+                    <a class="small-btn" href="{% url 'payment_method_edit' p.id %}">Редагувати</a>
+                    <a class="small-btn danger" href="{% url 'payment_method_delete' p.id %}">Видалити</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Методів оплати ще немає</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

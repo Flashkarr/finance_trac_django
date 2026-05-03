@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Транзакції{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Транзакції</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="title" placeholder="Назва" required>
+        <input type="number" step="0.01" name="amount" placeholder="Сума" required>
+
+        <select name="transaction_type">
+            {% for value, label in transaction_types %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="wallet" required>
+            {% for w in wallets %}
+                <option value="{{ w.id }}">{{ w.name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="category" required>
+            {% for c in categories %}
+                <option value="{{ c.id }}">{{ c.name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="payment_method" required>
+            {% for p in payment_methods %}
+                <option value="{{ p.id }}">{{ p.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="date" name="transaction_date">
+        <input type="text" name="note" placeholder="Нотатка">
+
+        <button type="submit">Додати</button>
+    </form>
+
+    <hr>
+
+    <div class="items-list">
+        {% for t in transactions %}
+            <div class="item-row">
+                <span>
+                    {{ t.title }} — {{ t.amount }} |
+                    {{ t.wallet.name }} |
+                    {{ t.category.name }} |
+                    {{ t.payment_method.name }}
+                </span>
+                <div>
+                    <a class="small-btn" href="{% url 'transaction_edit' t.id %}">Редагувати</a>
+                    <a class="small-btn danger" href="{% url 'transaction_delete' t.id %}">Видалити</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Транзакцій ще немає</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

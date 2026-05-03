@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Гаманці{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Мої карти та гаманці</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="Назва карти, наприклад Mono Black" required>
+
+        <select name="bank_name">
+            {% for value, label in bank_choices %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="text" name="card_number" maxlength="19" placeholder="0000 0000 0000 0000">
+        <input type="text" name="expiry_date" maxlength="5" placeholder="01/30">
+        <input type="password" name="cvv_demo" maxlength="3" placeholder="CVV ***">
+
+        <input type="number" step="0.01" name="balance" placeholder="Баланс" required>
+        <input type="text" name="currency" placeholder="Валюта" value="UAH">
+
+        <button type="submit">Прив'язати карту</button>
+    </form>
+
+    <hr>
+
+    <div class="cards-grid">
+        {% for w in wallets %}
+            <div class="bank-card">
+                <div class="bank-card-top">
+                    <span>{{ w.get_bank_name_display }}</span>
+                    <b>{{ w.currency }}</b>
+                </div>
+
+                <h3>{{ w.name }}</h3>
+                <p class="card-number">{{ w.masked_card }}</p>
+                <p>Баланс: <b>{{ w.balance }} {{ w.currency }}</b></p>
+                <p>Дійсна до: {{ w.expiry_date }}</p>
+
+                <div>
+                    <a class="small-btn" href="{% url 'wallet_edit' w.id %}">Редагувати</a>
+                    <a class="small-btn danger" href="{% url 'wallet_delete' w.id %}">Видалити</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Карт ще немає</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

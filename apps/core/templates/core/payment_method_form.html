@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Редагування методу оплати{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Редагувати метод оплати</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ payment_method.name }}" required>
+        <input type="text" name="details" value="{{ payment_method.details }}">
+        <button type="submit">Зберегти</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+<header>
+    <nav class="navbar">
+        <ul class="nav-left">
+            <li><a href="{% url 'welcome' %}">Головна</a></li>
+            <li><a href="{% url 'about_project' %}">Про проект</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'dashboard' %}">Кабінет</a></li>
+                <li><a href="{% url 'wallets' %}">Гаманці</a></li>
+                <li><a href="{% url 'categories' %}">Категорії</a></li>
+                <li><a href="{% url 'payment_methods' %}">Методи оплати</a></li>
+                <li><a href="{% url 'saving_jars' %}">Банки</a></li>
+                <li><a href="{% url 'transactions' %}">Транзакції</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Вхід</a></li>
+                <li><a href="{% url 'register' %}">Реєстрація</a></li>
+            {% endif %}
+        </ul>
+
+        {% if user.is_authenticated %}
+            <div class="profile-menu">
+                <button class="profile-btn" onclick="toggleMenu()" type="button">
+                    {{ user.username|slice:":1"|upper }}
+                </button>
+
+                <div id="dropdown" class="dropdown">
+                    <p class="profile-name">{{ user.username }}</p>
+                    <p class="profile-email">
+                        {% if user.email %}
+                            {{ user.email }}
+                        {% else %}
+                            Email не додано
+                        {% endif %}
+                    </p>
+
+                    <hr>
+
+                    <a href="{% url 'profile' %}?next={{ request.path }}">Мій профіль</a>
+                    <a href="{% url 'change_password' %}">Змінити пароль</a>
+
+                    <hr>
+
+                    <a href="{% url 'logout' %}" class="logout-link">Вийти</a>
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+</header>
+
+<script>
+function toggleMenu() {
+    document.getElementById("dropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.profile-btn')) {
+        let dropdown = document.getElementById("dropdown");
+        if (dropdown && dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+        }
+    }
+}
+</script>

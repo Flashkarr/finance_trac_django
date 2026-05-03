@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Реєстрація{% endblock title %}
+
+{% block main %}
+<div class="card">
+    <h2>Реєстрація</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="text" name="username" placeholder="Логін" required>
+        {% if errors.username %}
+            <p class="error">{{ errors.username }}</p>
+        {% endif %}
+
+        <input type="password" name="password" placeholder="Пароль" required>
+        {% if errors.password %}
+            <p class="error">{{ errors.password }}</p>
+        {% endif %}
+
+        <input type="password" name="password_repeat" placeholder="Повторіть пароль" required>
+        {% if errors.password_repeat %}
+            <p class="error">{{ errors.password_repeat }}</p>
+        {% endif %}
+
+        <button type="submit">Зареєструватись</button>
+    </form>
+</div>
+{% endblock main %}

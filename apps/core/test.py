@@ -1,7 +1,7 @@
 from datetime import date
 from django.test import TestCase
 
-from apps.core.models import (
+from .models import (
     UserProfile,
     Wallet,
     Category,

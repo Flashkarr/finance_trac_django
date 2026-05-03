@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Transaction</title>
+</head>
+<body>
+
+<h1>Add Transaction</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <input type="text" name="title" placeholder="Title"><br><br>
+    <input type="number" name="amount" placeholder="Amount"><br><br>
+
+    <select name="type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+    </select><br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>

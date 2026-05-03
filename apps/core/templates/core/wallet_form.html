@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Редагування гаманця{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Редагувати гаманець</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ wallet.name }}" required>
+        <input type="number" step="0.01" name="balance" value="{{ wallet.balance }}" required>
+        <input type="text" name="currency" value="{{ wallet.currency }}">
+        <button type="submit">Зберегти</button>
+    </form>
+</div>
+{% endblock %}

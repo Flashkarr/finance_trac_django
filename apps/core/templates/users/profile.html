@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Профіль{% endblock title %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Мій профіль</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <input type="hidden" name="next" value="{{ next_url }}">
+
+        <input type="text" name="first_name" placeholder="Ім'я" value="{{ user.first_name }}">
+        <input type="text" name="last_name" placeholder="Прізвище" value="{{ user.last_name }}">
+        <input type="email" name="email" placeholder="Email" value="{{ user.email }}">
+
+        <button type="submit">Зберегти</button>
+    </form>
+</div>
+{% endblock main %}

@@ -1,0 +1,305 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* ФОН */
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #061826 0%, #0d5167 45%, #00bcd4 100%);
+}
+
+/* ОБЩИЙ КОНТЕЙНЕР */
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+}
+
+/* МЕНЮ */
+.nav-left {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-left a {
+    white-space: nowrap;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    transition: 0.3s;
+}
+
+.nav-left a:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* PROFILE */
+.profile-menu {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* КРУГЛА КНОПКА */
+.profile-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.7);
+
+    background: radial-gradient(circle at 30% 25%, #ffffff 0%, #00e5ff 15%, #0072ff 55%, #7c4dff 100%);
+
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    cursor: pointer;
+
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.9);
+    transition: 0.3s;
+}
+
+.profile-btn:hover {
+    transform: scale(1.08) rotate(3deg);
+}
+
+/* DROPDOWN */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 70px;
+
+    width: 260px;
+    padding: 18px;
+
+    border-radius: 20px;
+    background: rgba(5, 20, 35, 0.96);
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px 0;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dropdown a:hover {
+    color: #00e5ff;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: 900;
+    margin: 0;
+}
+
+.profile-email {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.logout-link {
+    color: #ff6b6b !important;
+}
+
+/* ОСНОВНОЙ КОНТЕНТ */
+.page-content {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px;
+}
+
+/* КАРТОЧКИ */
+.card {
+    width: 100%;
+    max-width: 900px;
+
+    padding: 24px;
+
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.center-card {
+    margin: 0 auto;
+}
+
+/* WELCOME */
+.welcome-card {
+    text-align: center;
+}
+
+/* ФОРМЫ */
+input, select {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+
+    border-radius: 999px;
+    border: none;
+    outline: none;
+
+    font-size: 15px;
+}
+
+/* КНОПКИ */
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+
+    background: linear-gradient(135deg, #00e5ff, #0077ff);
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* СПИСКИ */
+.items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 14px 16px;
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* МАЛЕНЬКИЕ КНОПКИ */
+.small-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+
+    color: white;
+    font-weight: bold;
+
+    background: rgba(0, 198, 255, 0.5);
+    margin-left: 6px;
+}
+
+.small-btn:hover {
+    background: rgba(0, 198, 255, 0.9);
+}
+
+.small-btn.danger {
+    background: rgba(255, 80, 80, 0.6);
+}
+
+.small-btn.danger:hover {
+    background: rgba(255, 80, 80, 1);
+}
+
+/* ERROR */
+.error {
+    color: #ff6b6b;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 16px;
+    opacity: 0.7;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.bank-card {
+    padding: 22px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #111827, #0ea5e9);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    min-height: 180px;
+}
+
+.bank-card-top {
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.85;
+}
+
+.card-number {
+    letter-spacing: 3px;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    padding: 20px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.stat-card p {
+    margin: 0;
+    opacity: 0.8;
+}
+
+.stat-card h2 {
+    margin-bottom: 0;
+}

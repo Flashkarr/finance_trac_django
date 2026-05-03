@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main %}
+<h2>Categories</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input name="name" placeholder="Name">
+    <select name="category_type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+    </select>
+    <button>Add</button>
+</form>
+
+<ul>
+{% for i in items %}
+    <li>{{ i }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

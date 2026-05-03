@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Finance Tracker{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+<div class="wrapper">
+    {% include 'core/includes/header.html' %}
+
+    <main class="page-content">
+        {% block main %}{% endblock main %}
+    </main>
+
+    {% include 'core/includes/footer.html' %}
+</div>
+
+</body>
+</html>

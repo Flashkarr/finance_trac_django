@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Кабінет{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Фінансовий кабінет</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p>Загальний баланс</p>
+            <h2>{{ total_balance }} UAH</h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Накопичення</p>
+            <h2>{{ total_savings }} UAH</h2>
+        </div>
+
+        <div class="stat-card">
+            <p>Карт прив'язано</p>
+            <h2>{{ wallets.count }}</h2>
+        </div>
+    </div>
+
+    <h3>Мої карти</h3>
+
+    <div class="cards-grid">
+        {% for wallet in wallets %}
+            <div class="bank-card">
+                <div class="bank-card-top">
+                    <span>{{ wallet.get_bank_name_display }}</span>
+                    <b>{{ wallet.currency }}</b>
+                </div>
+
+                <h3>{{ wallet.name }}</h3>
+                <p class="card-number">{{ wallet.masked_card }}</p>
+                <p>Баланс: <b>{{ wallet.balance }} {{ wallet.currency }}</b></p>
+            </div>
+        {% empty %}
+            <p>Карт ще немає</p>
+        {% endfor %}
+    </div>
+
+    <h3>Банки накопичення</h3>
+
+    <div class="items-list">
+        {% for jar in saving_jars %}
+            <div class="item-row">
+                <span>{{ jar.title }} — {{ jar.current_amount }} / {{ jar.goal_amount }} UAH</span>
+            </div>
+        {% empty %}
+            <p>Банок накопичення ще немає</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

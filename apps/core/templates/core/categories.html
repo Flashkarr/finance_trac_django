@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Категорії{% endblock %}
+
+{% block main %}
+<div class="card center-card">
+    <h2>Категорії</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Назва" required>
+
+        <select name="category_type">
+            {% for value, label in category_types %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="text" name="description" placeholder="Опис">
+        <button type="submit">Додати</button>
+    </form>
+
+    <hr>
+
+    <div class="items-list">
+        {% for c in categories %}
+            <div class="item-row">
+                <span>{{ c.name }} — {{ c.get_category_type_display }}</span>
+                <div>
+                    <a class="small-btn" href="{% url 'category_edit' c.id %}">Редагувати</a>
+                    <a class="small-btn danger" href="{% url 'category_delete' c.id %}">Видалити</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Категорій ще немає</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
